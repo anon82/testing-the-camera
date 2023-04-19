@@ -1,0 +1,32 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import ZBarCam kivy_garden.zbarcam.ZBarCam
+#:import ZBarSymbol pyzbar.pyzbar.ZBarSymbol
+#:import utils kivy.utils
+
+Screen:
+    name:"QR Scan Screen"
+    BoxLayout: 
+        orientation: "vertical"
+        ActionBar:
+            pos_hint: {'top':1}
+            background_image: 'bg_normal.png' 
+            background_color: utils.get_color_from_hex('#2196F3') 
+            ActionView: 
+                use_separator: True
+                ActionPrevious:
+                    title: "ESCAPE SCAN SCREEN" 
+                    with_previous: False 
+		    
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: (255/255), (255/255), (255/255), 1.0 
+                Rectangle: 
+                    pos: self.pos
+                    size: self.size
+            orientation: "vertical"
+            padding: 10
+            spacing: 5
+            ZBarCam: 
+                id: zbarcam
+                code_types:ZBarSymbol.QRCODE.value,ZBarSymbol.EAN13.value
